@@ -67,11 +67,18 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
         run: |
            terraform-docs markdown table . > terraform-docs.md
+           echo "Generating terraform-docs and appending terraform.tfvars content..."
+           terraform-docs markdown table . > terraform-docs.md
+           echo "## terraform.tfvars Content" >> terraform-docs.md
+           echo '```hcl' >> terraform-docs.md
+           cat terraform.tfvars >> terraform-docs.md
+           echo '```' >> terraform-docs.md
+
 
       - name: Debug Working Directory
         run: |
          echo "Listing files in the working directory:"
-         ls -la
+         cat terraform-docs.md
 
 
 
