@@ -23,6 +23,9 @@ jobs:
   terraform:
     name: Terraform Workflow
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./environments/production
 
     steps:
       # Step 1: Checkout repository
@@ -62,16 +65,27 @@ jobs:
 
       - name: Generate Terraform Docs
         if: ${{ github.event_name == 'pull_request' }}
-        run: terraform-docs markdown table . > terraform-docs.md
+        run: |
+      - name: Generate Terraform Docs
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
+           terraform-docs markdown table . > terraform-docs.md
+           echo "Generating terraform-docs and appending terraform.tfvars content..."
+           terraform-docs markdown table . > terraform-docs.md
+           echo "## terraform.tfvars Content" >> terraform-docs.md
+           echo '```hcl' >> terraform-docs.md
+           cat terraform.tfvars >> terraform-docs.md
+           echo '```' >> terraform-docs.md
+
 
       # Step 7: Comment on Pull Request
       - name: Comment Terraform Docs
         if: ${{ github.event_name == 'pull_request' }}
         uses: marocchino/sticky-pull-request-comment@v2
         with:
-          path: terraform-docs.md
+          path: ./environments/production/terraform-docs.md
 
       # Step 8: Apply Terraform (only for main branch pushes)
       - name: Apply Terraform
-        if: github.event_name == 'push' && github.ref == 'refs/heads/staging'
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/production' || github.ref == 'refs/heads/development')
         run: terraform apply -auto-approve tfplan
