@@ -78,13 +78,6 @@ jobs:
            echo '```' >> terraform-docs.md
 
 
-      - name: Debug Working Directory
-        run: |
-         echo "Listing files in the working directory:"
-         cat terraform-docs.md
-
-
-
       # Step 7: Comment on Pull Request
       - name: Comment Terraform Docs
         if: ${{ github.event_name == 'pull_request' }}
@@ -94,5 +87,5 @@ jobs:
 
       # Step 8: Apply Terraform (only for main branch pushes)
       - name: Apply Terraform
-        if: github.event_name == 'push' && github.ref == 'refs/heads/staging'
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/production' || github.ref == 'refs/heads/development')
         run: terraform apply -auto-approve tfplan
