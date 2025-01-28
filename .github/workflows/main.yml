@@ -23,6 +23,9 @@ jobs:
   terraform:
     name: Terraform Workflow
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./environments/staging
 
     steps:
       # Step 1: Checkout repository
@@ -46,7 +49,6 @@ jobs:
       # Step 4: Initialize Terraform
       - name: Initialize Terraform
         run: |
-          cd environments/staging/
           terraform init
 
       # Terraform Plan
