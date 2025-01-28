@@ -8,7 +8,7 @@ map_public_ip    = true
 instance_count      = 2
 instance_type       = "t2.micro"
 ami_id              = "ami-04b4f1a9cf54c11d0"
-instance_name_prefix = "staging-ec2"
+instance_name_prefix = "staging-instance"
 
 bucket_name = "staging-bucket-demo1"
 acl         = "private"
