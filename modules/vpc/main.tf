@@ -11,6 +11,3 @@ resource "aws_subnet" "subnet" {
   map_public_ip_on_launch = var.map_public_ip
 }
 
-output "vpc_id" {
-  value = aws_vpc.custom.id
-}
