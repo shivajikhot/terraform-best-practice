@@ -63,11 +63,27 @@ jobs:
       - name: Generate Terraform Docs
         if: ${{ github.event_name == 'pull_request' }}
         run: |
+      - name: Generate Terraform Docs
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
            terraform-docs markdown table . > terraform-docs.md
-           echo "## terraform.tfvars Content" >> terraform-doc.md
-           echo '```hcl' >> terraform-doc.md
-           cat terraform.tfvars >> terraform-doc.md
-           echo '```' >> terraform-doc.md
+           echo "## terraform.tfvars Content" >> terraform-docs.md
+           if [ -f terraform.tfvars ]; then
+           echo '```hcl' >> terraform-docs.md
+           cat terraform.tfvars >> terraform-docs.md
+           echo '```' >> terraform-docs.md
+           else
+           echo "terraform.tfvars file not found!" >> terraform-docs.md
+            fi
+        working-directory: ./environments/${{ github.ref_name }}
+
+      - name: Debug Working Directory
+        run: |
+         echo "Listing files in the working directory:"
+         ls -la
+        working-directory: ./environments/${{ github.ref_name }}
+
+
 
       # Step 7: Comment on Pull Request
       - name: Comment Terraform Docs
