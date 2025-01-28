@@ -1,3 +1,19 @@
+provider "aws" {
+  region = var.aws_region
+}
+
+
+
+terraform {
+  backend "s3" {
+    bucket         = "terraform-backend-statefil"  
+    key            = "${path.basename(path.cwd)}/terraform.tfstate"
+    region         = "us-east-1"            
+    encrypt        = true
+  }
+}
+
+
 module "vpc" {
   source        = "../../modules/vpc"
   cidr_block    = var.cidr_block
