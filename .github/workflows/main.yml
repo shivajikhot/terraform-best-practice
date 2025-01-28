@@ -46,6 +46,7 @@ jobs:
       # Step 4: Initialize Terraform
       - name: Initialize Terraform
         run: |
+          pwd
           terraform init
 
       # Terraform Plan
