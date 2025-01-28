@@ -7,9 +7,9 @@ map_public_ip    = true
 
 instance_count      = 1
 instance_type       = "t2.micro"
-ami_id              = "ami-0c1a7f89451184c8b"
+ami_id              = "ami-04b4f1a9cf54c11d0"
 instance_name_prefix = "dev-ec2"
 
-bucket_name = "development-bucket"
+bucket_name = "development-bucket-demo1"
 acl         = "private"
 environment = "development"

@@ -6,10 +6,10 @@ subnet_cidrs     = ["192.168.1.0/24", "192.168.2.0/24", "192.168.3.0/24"]
 map_public_ip    = false
 
 instance_count      = 3
-instance_type       = "t3.medium"
-ami_id              = "ami-0c1a7f89451184c8b"
+instance_type       = "t2.micro"
+ami_id              = "ami-04b4f1a9cf54c11d0"
 instance_name_prefix = "prod-ec2"
 
-bucket_name = "production-bucket"
+bucket_name = "production-bucket-demo1"
 acl         = "private"
 environment = "production"

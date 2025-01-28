@@ -52,3 +52,8 @@ variable "acl" {
   description = "ACL for S3 bucket"
   type        = string
 }
+
+variable "environment" {
+  description = "The environment (e.g., staging, production, development)"
+  type        = string
+}
