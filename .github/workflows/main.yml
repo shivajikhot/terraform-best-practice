@@ -62,7 +62,12 @@ jobs:
 
       - name: Generate Terraform Docs
         if: ${{ github.event_name == 'pull_request' }}
-        run: terraform-docs markdown table . > terraform-docs.md
+        run: |
+           terraform-docs markdown table . > terraform-docs.md
+           echo "## terraform.tfvars Content" >> terraform-doc.md
+           echo "```hcl" >> terraform-doc.md
+           cat terraform.tfvars >> terraform-doc.md
+           echo "```" >> terraform-doc.md
 
       # Step 7: Comment on Pull Request
       - name: Comment Terraform Docs
