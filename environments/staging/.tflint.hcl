@@ -1,18 +1,20 @@
 plugin "aws" {
   enabled = true
+  version = "latest"
   source  = "github.com/terraform-linters/tflint-ruleset-aws"
-  version = "0.37.0"
-  region  = "us-east-1"
+  region  = "us-east-1" # Change this to your AWS region
 }
 
 rule "aws_instance_invalid_type" {
   enabled = true
   instance_types = ["t3.micro", "t3.small"] # Allowed EC2 types
-}
 
-rule "aws_s3_bucket_public_access" {
+
+# ✅ Use the correct rule name
+rule "aws_s3_bucket_public_acl" {
   enabled = true
 }
+
 
 rule "aws_vpc_invalid_cidr_block" {
   enabled = true
