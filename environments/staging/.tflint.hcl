@@ -8,8 +8,7 @@ plugin "aws" {
 rule "aws_instance_invalid_type" {
   enabled = true
   instance_types = ["t3.micro", "t3.small"] # Allowed EC2 types
-
-
+}
 # ✅ Use the correct rule name
 rule "aws_s3_bucket_public_acl" {
   enabled = true
