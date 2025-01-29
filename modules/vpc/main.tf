@@ -3,6 +3,9 @@ resource "aws_vpc" "custom" {
   enable_dns_support   = true
   enable_dns_hostnames = true
 }
+  tags = {
+    Name = var.vpc_name
+  }
 
 resource "aws_subnet" "subnet" {
   count                  = var.subnet_count
@@ -10,4 +13,8 @@ resource "aws_subnet" "subnet" {
   cidr_block             = element(var.subnet_cidrs, count.index)
   map_public_ip_on_launch = var.map_public_ip
 }
+
+  tags = {
+    Name = "subnet-${count.index}"
+  }
 
