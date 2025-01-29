@@ -29,6 +29,8 @@ module "vpc" {
   subnet_count  = var.subnet_count
   subnet_cidrs  = var.subnet_cidrs
   map_public_ip = var.map_public_ip
+  vpc_name      = var.environment
+
 }
 
 module "ec2" {
