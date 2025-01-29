@@ -50,10 +50,14 @@ jobs:
       - name: Initialize Terraform
         run: |
           terraform init
-
-      - name: Run TFLint for Staging
+      - name: Install & Configure TFLint
         run: |
+         # Install TFLint
          curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+         # Install AWS Plugin
+         tflint --init
+      - name: validate tf configuration
+        run: |
          tflint
 
       # Terraform Plan
