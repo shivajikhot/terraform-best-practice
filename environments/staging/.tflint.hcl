@@ -10,7 +10,7 @@ rule "aws_instance_invalid_type" {
   instance_types = ["t3.micro", "t3.small"] # Allowed EC2 types
 }
 
-rule "aws_s3_bucket_public_access_block" {
+rule "aws_s3_bucket_public_access" {
   enabled = true
 }
 
