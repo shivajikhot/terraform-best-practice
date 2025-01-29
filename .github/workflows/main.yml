@@ -51,6 +51,11 @@ jobs:
         run: |
           terraform init
 
+      - name: Run TFLint for Staging
+        run: |
+         curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+         tflint
+
       # Terraform Plan
       - name: Terraform Plan
         id: plan
@@ -63,9 +68,6 @@ jobs:
          mv terraform-docs /usr/local/bin/
         if: ${{ github.event_name == 'pull_request' }}
 
-      - name: Generate Terraform Docs
-        if: ${{ github.event_name == 'pull_request' }}
-        run: |
       - name: Generate Terraform Docs
         if: ${{ github.event_name == 'pull_request' }}
         run: |
