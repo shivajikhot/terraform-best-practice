@@ -28,11 +28,11 @@ jobs:
         working-directory: ./environments/staging
 
     steps:
-      # Step 1: Checkout repository
+      # Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Configure AWS credentials
+      # Configure AWS credentials
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
@@ -40,23 +40,22 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
-      # Step 3: Setup Terraform
+      # Setup Terraform
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.5.6
 
-      # Step 4: Initialize Terraform
+      # Initialize Terraform
       - name: Initialize Terraform
         run: |
           terraform init
+          
       - name: Install & Configure TFLint
         run: |
-         # Install TFLint
          curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
-         # Install AWS Plugin
-         mkdir -p ~/.tflint.d/plugins
          tflint --init
+         
       - name: validate tf configuration
         run: |
          tflint
